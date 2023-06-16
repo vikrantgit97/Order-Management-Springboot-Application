@@ -11,31 +11,26 @@ import com.ordermanagement.service.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService{
     
-	private ModelMapper mapper;
-	private CustomerRepository custRepo;
+	private final ModelMapper mapper;
+	private final CustomerRepository customerRepository;
 	
-	
-	
-	public CustomerServiceImpl(ModelMapper mapper, CustomerRepository custRepo) {
+
+	public CustomerServiceImpl(ModelMapper mapper, CustomerRepository customerRepository) {
 		super();
 		this.mapper = mapper;
-		this.custRepo = custRepo;
+		this.customerRepository = customerRepository;
 	}
-
 
 
 	@Override
 	public CustomerDto registerCustomer(CustomerDto custdto) {
 		
 		Customer customer = mapToEntity(custdto);
-		Customer newCust=custRepo.save(customer);
+		Customer newCust=customerRepository.save(customer);
 		CustomerDto cust =mapToDto(newCust);
 		return cust;
 	}
-   
-	
-	
-	
+
 	private Customer mapToEntity(CustomerDto custdto) {
 		Customer customer = mapper.map(custdto, Customer.class);
 		return customer;

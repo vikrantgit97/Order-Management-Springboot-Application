@@ -12,14 +12,14 @@ import com.ordermanagement.dto.CustomerDto;
 import com.ordermanagement.service.CustomerService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/customer")
 public class CustomerController {
 
 	@Autowired
-	private CustomerService custServ;
+	private CustomerService customerService;
 	
 	@PostMapping("/register")
 	public ResponseEntity<CustomerDto> registerCustomerHandle(@RequestBody CustomerDto custdto){
-		return new ResponseEntity<>(custServ.registerCustomer(custdto),HttpStatus.CREATED);
+		return new ResponseEntity<>(customerService.registerCustomer(custdto),HttpStatus.CREATED);
 	}
 }

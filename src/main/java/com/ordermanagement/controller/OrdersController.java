@@ -17,18 +17,18 @@ import com.ordermanagement.service.OrderService;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/orders")
 public class OrdersController {
 
 	@Autowired
-	private OrderService ordersServ;
+	private OrderService ordersService;
 	
 	
-	@PostMapping("/orders/{custId}")
+	@PostMapping("/{Id}")
 	public ResponseEntity<OrdersDto> placeOrderHandle(@RequestBody OrdersDto ordersDto,
-			@PathVariable ("custId") Integer custId){
+			@PathVariable ("Id") Integer Id){
 		
-		return new ResponseEntity<OrdersDto>(ordersServ.placeOrder(ordersDto, custId)
+		return new ResponseEntity<OrdersDto>(ordersService.placeOrder(ordersDto, Id)
 				,HttpStatus.CREATED);
 	}
 }
