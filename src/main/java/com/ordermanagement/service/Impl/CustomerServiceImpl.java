@@ -23,22 +23,23 @@ public class CustomerServiceImpl implements CustomerService{
 
 
 	@Override
-	public CustomerDto registerCustomer(CustomerDto custdto) {
-		
-		Customer customer = mapToEntity(custdto);
-		Customer newCust=customerRepository.save(customer);
-		CustomerDto cust =mapToDto(newCust);
-		return cust;
+	public CustomerDto registerCustomer(CustomerDto customerDto) {
+		Customer customer = mapToEntity(customerDto);
+		Customer newCustomer=customerRepository.save(customer);
+		CustomerDto customerDto1 =mapToDto(newCustomer);
+		return customerDto1;
 	}
 
-	private Customer mapToEntity(CustomerDto custdto) {
-		Customer customer = mapper.map(custdto, Customer.class);
+
+	private Customer mapToEntity(CustomerDto customerDto) {
+		Customer customer = mapper.map(customerDto, Customer.class);
 		return customer;
 	}
-	
+
+
 	private CustomerDto mapToDto(Customer customer) {
-		CustomerDto custDto = mapper.map(customer, CustomerDto.class);
-		return custDto;
+		CustomerDto customerDto = mapper.map(customer, CustomerDto.class);
+		return customerDto;
 	}
 	
 }

@@ -24,12 +24,12 @@ public class OrdersServiceImpl  implements OrderService{
 	private OrderRepository ordersRepo;
 	
 	@Autowired
-	private CustomerRepository custRepo;
+	private CustomerRepository customerRepository;
 	
 	@Override
 	public OrdersDto placeOrder(OrdersDto ordersDto, long custId) {
 		Orders order = mapToentity(ordersDto);
-		Customer customer = custRepo.findById(custId)
+		Customer customer = customerRepository.findById(custId)
 				 .orElseThrow(()->new CustomerException("Customer Not register, please register first..."));
 		 
 		Set<Orders> orderSet= customer.getOrders();
@@ -52,7 +52,7 @@ public class OrdersServiceImpl  implements OrderService{
 	
 		order.setCustomer(customer);
 		Orders newOrder= ordersRepo.save(order);
-		custRepo.save(customer);
+		customerRepository.save(customer);
 		return mapToDto(newOrder);
 	
 	}
